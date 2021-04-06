@@ -1,0 +1,35 @@
+Setting environment for using XAMPP for Windows.
+pl8431@C201N1 c:\temp\xampp
+# C:\TEMP\xampp\mysql\bin\mysql.exe -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.37-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE draw.io
+    -> CREATE DATABASE draw.io;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.io
+CREATE DATABASE draw.io' at line 1
+MariaDB [(none)]> CREATE DATABASE drawio;
+Query OK, 1 row affected (0.01 sec)
+
+MariaDB [(none)]> use drawio;
+Database changed
+MariaDB [drawio]> CREATE TABLE prodavec (id int not null primary key, FIO varchar(255), City varchar(255), Procent float(2, 1));
+Query OK, 0 rows affected (0.21 sec)
+
+MariaDB [drawio]> CREATE TABLE pokupatel (id int not null primary key, FIO varchar(255), City varchar(255));
+Query OK, 0 rows affected (0.15 sec)
+
+MariaDB [drawio]> CREATE TABLE proizvoditel (id int not null primary key, Name varchar(255), Countrie varchar(255));
+Query OK, 0 rows affected (0.13 sec)
+
+MariaDB [drawio]> CREATE TABLE towar (id int not null primary key, Name varchar(255), Cost int, id_pr int(15), FOREIGN KEY (id_pr) REFERNCES proizvoditel(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'REFERNCES proizvoditel(id))' at line 1
+MariaDB [drawio]> CREATE TABLE towar (id int not null primary key, Name varchar(255), Cost int, id_pr int(15), FOREIGN KEY (id_pr) REFERENCES proizvoditel(id));
+Query OK, 0 rows affected (0.15 sec)
+
+MariaDB [drawio]> CREATE TABLE prodaji (id int not null primary key, FOREIGN KEY (id_pr) REFERENCES prodavec(id),id_p int, FOREIGN KEY (id_p) REFERENCES pokupatel (id_p) Cost int, id_pr int(15), FOREIGN KEY (id_pr) REFERENCES proizvoditel(id));
